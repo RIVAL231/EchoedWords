@@ -22,7 +22,8 @@ export default function AdminPoemList({ poems: initialPoems }) {
       });
 
       if (response.ok) {
-        setPoems((prevPoems) => prevPoems.filter((poem) => poem._id.toString() !== id));
+        const updatedPoems = poems.filter((poem) => poem._id.toString() !== id);
+        setPoems(updatedPoems);  // Reset state after filtering out the approved poem
       } else {
         console.error('Failed to approve poem');
       }
