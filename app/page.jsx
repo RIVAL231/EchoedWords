@@ -16,7 +16,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchPoems = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
+   
         const response = await fetch(`/api/approved-poems`, {
           method: 'GET',
           headers: {
@@ -28,7 +28,8 @@ export default function HomePage() {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-
+if(response.ok)
+  await  fetchPoems();
         const data = await response.json();
         console.log("Poems data:", data);
         setPoems(data);
