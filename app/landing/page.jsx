@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import PoemCard from '@/components/PoemCard';
 import Lottie from 'lottie-react';
 import bookAnimation from '../../public/animations/book-animation.json';
+import Navigation from '@/components/Navigation';
 
 export default function LandingPage({ poems }) {
   // Check if poems is defined and an array, otherwise default to an empty array
@@ -11,6 +12,7 @@ export default function LandingPage({ poems }) {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
+        
       <header className="mb-12 text-center">
         <motion.h1 
           className="text-5xl font-serif mb-4 text-indigo-800 relative z-10"
@@ -23,6 +25,7 @@ export default function LandingPage({ poems }) {
       </header>
 
       <main>
+        <Navigation />
         <section className="mb-16 relative">
           <motion.h2 
             className="text-3xl font-serif mb-6 text-center text-purple-700"
