@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 
 export const metadata = {
-  title: 'Sankalp\'s Poetic Musings',
+  title: 'Echoed Words',
   description: 'A blog featuring poetry by Sankalp and guest poets',
 }
 
