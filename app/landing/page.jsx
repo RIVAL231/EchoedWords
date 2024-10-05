@@ -1,13 +1,14 @@
-// landing/page.jsx
-
+// app/landing/page.jsx
 'use client'
-
 import { motion } from 'framer-motion';
 import PoemCard from '@/components/PoemCard';
 import Lottie from 'lottie-react';
-import bookAnimation from '../../public/animations/book-animation.json'
+import bookAnimation from '../../public/animations/book-animation.json';
 
 export default function LandingPage({ poems }) {
+  // Check if poems is defined and an array, otherwise default to an empty array
+  const poemList = Array.isArray(poems) ? poems : [];
+
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
       <header className="mb-12 text-center">
@@ -32,7 +33,7 @@ export default function LandingPage({ poems }) {
             Featured Poems
           </motion.h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {poems.map((poem, index) => (
+            {poemList.map((poem, index) => (
               <motion.div
                 key={poem._id}
                 initial={{ opacity: 0, y: 50 }}
