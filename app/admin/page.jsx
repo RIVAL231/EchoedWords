@@ -7,20 +7,18 @@ import AdminPoemList from '../../components/AdminPoemList'
 export default function AdminPage() {
   const [pendingPoems, setPendingPoems] = useState([])
 
-  useEffect(() => {
-    const fetchPoems = async () => {
-      try {
-        const response = await fetch('/api/approve-poem')
-        if (!response.ok) throw new Error('Failed to fetch pending poems')
-        const data = await response.json()
-        setPendingPoems(data)
-      } catch (error) {
-        console.error('Error fetching pending poems:', error)
-      }
-    }
+   // Fetch pending poems
+   useEffect(() => {
+    const fetchPendingPoems = async () => {
+      const response = await fetch('/api/pending-poem');
+      const data = await response.json();
+      setPendingPoems(data);
+    };
 
-    fetchPoems()
-  }, []) // Empty dependency array ensures this only runs once after mount
+    fetchPendingPoems();
+  }, []);
+
+  // Empty dependency array ensures this only runs once after mount
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
