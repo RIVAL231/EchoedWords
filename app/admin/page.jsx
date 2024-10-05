@@ -12,7 +12,7 @@ export default function AdminPage() {
     const fetchPendingPoems = async () => {
       const response = await fetch('/api/pending-poem?revalidate=' + new Date().getTime());
       const data = await response.json();
-      console.log(data); // Ensure data is fetched correctly
+      // console.log(data); // Ensure data is fetched correctly
       setPendingPoems(data);
     };
 
