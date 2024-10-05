@@ -5,10 +5,19 @@ import PoemCard from '@/components/PoemCard';
 import Lottie from 'lottie-react';
 import bookAnimation from '../../public/animations/book-animation.json';
 import Navigation from '@/components/Navigation';
-
-export default function LandingPage({ poems }) {
+import { useState,useEffect } from 'react';
+export default function LandingPage() {
   // Check if poems is defined and an array, otherwise default to an empty array
-  const poemList = Array.isArray(poems) ? poems : [];
+  const [poemList, setPoems] = useState([]);
+  useEffect(() => {
+    const fetchPoems = async () => {
+      const response = await fetch('/api/approved-poems');
+      const data = await response.json();
+      setPoems(data);
+    };
+
+    fetchPoems();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
