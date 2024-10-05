@@ -1,4 +1,5 @@
-'use-client'
+'use client'
+
 import { useEffect, useState } from 'react'
 import Navigation from '../../components/Navigation'
 import AdminPoemList from '../../components/AdminPoemList'
