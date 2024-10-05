@@ -1,13 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function AdminPoemList({ poems: initialPoems }) {
   const [poems, setPoems] = useState(initialPoems);
-  const [loading, setLoading] = useState(false);
+
+  // Sync state with initialPoems prop
+  useEffect(() => {
+    setPoems(initialPoems);
+  }, [initialPoems]);
 
   const handleApprove = async (id) => {
-    setLoading(true); // Start loading
     try {
       const response = await fetch('/api/approve-poem', {
         method: 'POST',
@@ -18,14 +21,12 @@ export default function AdminPoemList({ poems: initialPoems }) {
       });
 
       if (response.ok) {
-        setPoems(poems.filter((poem) => poem._id.toString() !== id));
+        setPoems((prevPoems) => prevPoems.filter((poem) => poem._id.toString() !== id));
       } else {
         console.error('Failed to approve poem');
       }
     } catch (error) {
       console.error('Error:', error);
-    } finally {
-      setLoading(false); // End loading
     }
   };
 
@@ -40,12 +41,11 @@ export default function AdminPoemList({ poems: initialPoems }) {
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => handleApprove(poem._id.toString())}
-                className={`bg-green-500 text-white px-4 py-2 rounded ${loading ? 'opacity-50' : 'hover:bg-green-600'}`}
-                disabled={loading}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
               >
-                {loading ? 'Approving...' : 'Approve'}
+                Approve
               </button>
-              {/* Reject button (optional) */}
+              {/* Optional Reject Button */}
               {/* <button
                 onClick={() => handleReject(poem._id.toString())}
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"

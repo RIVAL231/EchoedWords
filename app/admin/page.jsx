@@ -1,24 +1,23 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import Navigation from '../../components/Navigation'
-import AdminPoemList from '../../components/AdminPoemList'
+import { useEffect, useState } from 'react';
+import Navigation from '../../components/Navigation';
+import AdminPoemList from '../../components/AdminPoemList';
 
 export default function AdminPage() {
-  const [pendingPoems, setPendingPoems] = useState([])
+  const [pendingPoems, setPendingPoems] = useState([]);
 
-   // Fetch pending poems
-   useEffect(() => {
+  // Fetch pending poems
+  useEffect(() => {
     const fetchPendingPoems = async () => {
       const response = await fetch('/api/pending-poem');
       const data = await response.json();
+      console.log(data); // Ensure data is fetched correctly
       setPendingPoems(data);
     };
 
     fetchPendingPoems();
   }, []);
-
-  // Empty dependency array ensures this only runs once after mount
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
@@ -31,5 +30,5 @@ export default function AdminPage() {
         <AdminPoemList poems={pendingPoems} />
       </main>
     </div>
-  )
+  );
 }

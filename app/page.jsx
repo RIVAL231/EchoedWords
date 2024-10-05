@@ -99,14 +99,14 @@ export default function HomePage() {
           </svg>
         </section>
 
-        <section className="animate-fade-in relative">
+        {/* <section className="animate-fade-in relative">
           {/* <NewsletterForm /> */}
           
           {/* Lottie Animation */}
-          <div className="absolute bottom-0 right-0 w-40 h-40 opacity-70 pointer-events-none">
+          {/* <div className="absolute bottom-0 right-0 w-40 h-40 opacity-70 pointer-events-none">
             <Lottie animationData={quillAnimation} loop={true} />
           </div>
-        </section>
+        </section> */}
       </main>
 
       {/* Background Lottie Animation */}
