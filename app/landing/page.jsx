@@ -11,11 +11,17 @@ export default function LandingPage() {
   const [poemList, setPoems] = useState([]);
   useEffect(() => {
     const fetchPoems = async () => {
-      const response = await fetch('/api/approved-poems');
+      const response = await fetch('/api/approved-poems', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',  // Prevent caching
+        }
+      });
       const data = await response.json();
       setPoems(data);
     };
-
+  
     fetchPoems();
   }, []);
 
