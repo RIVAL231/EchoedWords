@@ -17,19 +17,23 @@ export default function HomePage() {
   useEffect(() => {
     const fetchPoems = async () => {
       try {
-        const response = await fetch('/api/approved-poems')
+        const apiUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
+        const response = await fetch(`/api/approved-poems`);
+        console.log("Response status:", response.status);
         if (!response.ok) {
-          throw new Error('Network response was not ok')
+          throw new Error('Network response was not ok');
         }
-        const data = await response.json()
-        setPoems(data)
+        const data = await response.json();
+        console.log("Poems data:", data);
+        setPoems(data);
       } catch (error) {
-        console.error('Error fetching poems:', error)
+        console.error('Error fetching poems:', error);
       }
-    }
-
-    fetchPoems()
-  }, [])
+    };
+  
+    fetchPoems();
+  }, []); // Empty array to fetch only once when component mounts
+  
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
