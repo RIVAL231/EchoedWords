@@ -7,7 +7,8 @@ export async function GET() {
   try {
     const db = await connectToDatabase();
     const pendingPoems = await db.collection('pending_poems').find().toArray();
-    
+    const headers = new Headers();
+    headers.append('Cache-Control', 'no-store');
     return new Response(JSON.stringify(pendingPoems), { status: 200 });
   } catch (error) {
     console.error('Error fetching pending poems:', error);
