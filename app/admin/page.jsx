@@ -10,7 +10,7 @@ export default function AdminPage() {
   useEffect(() => {
     const fetchPoems = async () => {
       try {
-        const response = await fetch('/api/approve-poems')
+        const response = await fetch('/api/approve-poem')
         if (!response.ok) throw new Error('Failed to fetch pending poems')
         const data = await response.json()
         setPendingPoems(data)
