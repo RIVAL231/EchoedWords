@@ -9,9 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
+    "child-process": "^1.0.2",
+    "dotenv": "^16.4.5",
+    "framer-motion": "^11.11.1",
+    "lucide-react": "^0.447.0",
+    "mongodb": "^6.9.0",
+    "net": "^1.0.2",
+    "next": "14.2.14",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.14"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "postcss": "^8",
