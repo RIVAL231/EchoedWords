@@ -5,7 +5,7 @@ import Navigation from '../../components/Navigation';
 import AdminPoemList from '../../components/AdminPoemList';
 
 export default function AdminPage() {
-  const [pendingPoems, setPendingPoems] = useState([]);
+  const [pendingPoem, setPendingPoems] = useState([]);
 
   // Fetch pending poems
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function AdminPage() {
       </header>
       <main>
         <h2 className="text-3xl font-serif mb-6 text-center text-purple-700">Pending Poems</h2>
-        <AdminPoemList poems={pendingPoems} />
+        <AdminPoemList poems={pendingPoem} />
       </main>
     </div>
   );
