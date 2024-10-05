@@ -10,7 +10,7 @@ export default function AdminPage() {
   // Fetch pending poems
   useEffect(() => {
     const fetchPendingPoems = async () => {
-      const response = await fetch('/api/pending-poem');
+      const response = await fetch('/api/pending-poem?revalidate=' + new Date().getTime());
       const data = await response.json();
       console.log(data); // Ensure data is fetched correctly
       setPendingPoems(data);
