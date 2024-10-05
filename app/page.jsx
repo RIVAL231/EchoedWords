@@ -17,7 +17,7 @@ export default function HomePage() {
     const fetchPoems = async () => {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000';
-        const response = await fetch(`${apiUrl}/api/approved-poems`, {
+        const response = await fetch(`/api/approved-poems`, {
           method: 'GET',
           headers: {
             'Cache-Control': 'no-cache', // Disable cache
