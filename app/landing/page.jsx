@@ -11,19 +11,31 @@ export default function LandingPage() {
   const [poemList, setPoems] = useState([]);
   useEffect(() => {
     const fetchPoems = async () => {
-      const response = await fetch('/api/approved-poems', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache',  // Prevent caching
+      try {
+        const response = await fetch(`/api/approved-poems?timestamp=${new Date().getTime()}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+          },
+          cache: 'no-store',
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
         }
-      });
-      const data = await response.json();
-      setPoems(data);
+  
+        const data = await response.json();
+        setPoems(data);
+      } catch (error) {
+        console.error('Failed to fetch poems:', error);
+        setError('Failed to load poems. Please try again later.');
+      }
     };
   
     fetchPoems();
   }, []);
+  
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
