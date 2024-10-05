@@ -2,8 +2,16 @@ import Navigation from '../../components/Navigation'
 import AdminPoemList from '../../components/AdminPoemList'
 import { getPendingPoems } from '../../lib/db'
 
+
 export default async function AdminPage() {
   const pendingPoems = await getPendingPoems()
+
+ 
+    const fetchPoems = async () => {
+      const response = await fetch('/api/pending-poems')
+      const data = await response.json()
+        setPendingPoems(data)
+    }
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
