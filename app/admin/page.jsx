@@ -1,17 +1,25 @@
+'use-client'
+import { useEffect, useState } from 'react'
 import Navigation from '../../components/Navigation'
 import AdminPoemList from '../../components/AdminPoemList'
-import { getPendingPoems } from '../../lib/db'
 
+export default function AdminPage() {
+  const [pendingPoems, setPendingPoems] = useState([])
 
-export default async function AdminPage() {
-  const pendingPoems = await getPendingPoems()
-
- 
+  useEffect(() => {
     const fetchPoems = async () => {
-      const response = await fetch('/api/pending-poems')
-      const data = await response.json()
+      try {
+        const response = await fetch('/api/pending-poems')
+        if (!response.ok) throw new Error('Failed to fetch pending poems')
+        const data = await response.json()
         setPendingPoems(data)
+      } catch (error) {
+        console.error('Error fetching pending poems:', error)
+      }
     }
+
+    fetchPoems()
+  }, []) // Empty dependency array ensures this only runs once after mount
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
