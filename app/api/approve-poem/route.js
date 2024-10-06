@@ -1,7 +1,7 @@
 // pages/api/approve-poem/route.js
 import { ObjectId } from 'mongodb';
 import { connectToDatabase } from '../../../lib/db';
-
+export const dynamic = 'force-dynamic';
 export async function POST(req) {
   const { id } = await req.json();
 

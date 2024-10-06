@@ -1,16 +1,20 @@
-// app/landing/page.jsx
 'use client'
+
 import { motion } from 'framer-motion';
 import PoemCard from '@/components/PoemCard';
 import Lottie from 'lottie-react';
 import bookAnimation from '../../public/animations/book-animation.json';
 import Navigation from '@/components/Navigation';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 export default function LandingPage() {
-  // Check if poems is defined and an array, otherwise default to an empty array
   const [poemList, setPoems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchPoems = async () => {
+      setIsLoading(true);
       try {
         const response = await fetch(`/api/approved-poems?timestamp=${new Date().getTime()}`, {
           method: 'GET',
@@ -26,20 +30,20 @@ export default function LandingPage() {
         }
   
         const data = await response.json();
-        setPoems(data);
+        setPoems(Array.isArray(data.poems) ? data.poems : []);
       } catch (error) {
         console.error('Failed to fetch poems:', error);
         setError('Failed to load poems. Please try again later.');
+      } finally {
+        setIsLoading(false);
       }
     };
   
     fetchPoems();
   }, []);
-  
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl relative overflow-hidden">
-        
       <header className="mb-12 text-center">
         <motion.h1 
           className="text-5xl font-serif mb-4 text-indigo-800 relative z-10"
@@ -62,18 +66,24 @@ export default function LandingPage() {
           >
             Featured Poems
           </motion.h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {poemList.map((poem, index) => (
-              <motion.div
-                key={poem._id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <PoemCard poem={poem} />
-              </motion.div>
-            ))}
-          </div>
+          {isLoading ? (
+            <p className="text-center">Loading poems...</p>
+          ) : error ? (
+            <p className="text-center text-red-500">{error}</p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-8">
+              {poemList.map((poem, index) => (
+                <motion.div
+                  key={poem._id}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <PoemCard poem={poem} />
+                </motion.div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
 
