@@ -17,7 +17,7 @@ export default function ContactPage() {
           </p>
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-2 text-indigo-700">Contact Information</h3>
-            <p className="text-gray-700">Email: <a href="mailto:sankalpsharma250@gmail.com" className="text-indigo-600 hover:text-indigo-800 transition-colors">sankalp@poeticmusings.com</a></p>
+            <p className="text-gray-700">Email: <a href="mailto:sankalpsharma250@gmail.com" className="text-indigo-600 hover:text-indigo-800 transition-colors">sankalpsharma250@gmail.com</a></p>
             <p className="text-gray-700">Phone: +91 9616040112</p>
           </div>
           <div className="mb-6">
